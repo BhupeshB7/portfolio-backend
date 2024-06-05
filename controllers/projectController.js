@@ -42,7 +42,7 @@ const createProject = async (req, res) => {
 };
 const getProjects = async (req, res) => {
     try {
-      let { page = 1, limit = 2, sort = 'desc', sortBy = 'createdAt' } = req.query;
+      let { page = 1, limit = 5, sort = 'desc', sortBy = 'createdAt' } = req.query;
   
       page = parseInt(page, 10);
       limit = parseInt(limit, 10);
