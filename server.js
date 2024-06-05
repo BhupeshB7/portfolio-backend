@@ -13,7 +13,8 @@ app.use(bodyParser.json());
 
 const emailRoutes = require('./routes/emailRoutes');
 app.use('/api', emailRoutes);
-
+const projectRoutes = require('./routes/projectRoutes');
+app.use('/api', projectRoutes);
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.MONGODB_URI, {
