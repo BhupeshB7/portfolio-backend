@@ -15,6 +15,9 @@ const emailRoutes = require('./routes/emailRoutes');
 app.use('/api', emailRoutes);
 const projectRoutes = require('./routes/projectRoutes');
 app.use('/api', projectRoutes);
+app.get('/api/status', (req, res) => {
+  res.json({ message: 'Portfoliobackend server is started now' });
+});
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.MONGODB_URI, {
