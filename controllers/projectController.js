@@ -51,6 +51,7 @@ const getProjects = async (req, res) => {
   
       const allProjects = await Project.find()
         .sort({ [sortBy]: sortOrder })
+        .select("-img")
         .skip((page - 1) * limit)
         .limit(limit)
         .exec();
@@ -69,7 +70,36 @@ const getProjects = async (req, res) => {
       return errorResponse(res, 500, error.message, 'Server error');
     }
   };
+ const getProjectImage = async (req, res) => {
+  try {
+    // Validate request parameters
+    
+
+    const { projectId } = req.params;
+
+    // Validate projectId format
+    if (!projectId.match(/^[0-9a-fA-F]{24}$/)) {
+      return errorResponse(res, 400, 'Invalid project ID format', 'The provided project ID is not valid');
+    }
+
+    // Fetch project image
+    const project = await Project.findById(projectId).select("img").exec();
+
+    if (!project) {
+      return errorResponse(res, 404, 'Project not found', 'No project found with the given ID');
+    }
+
+    // Return the project image
+    return res.status(200).send(project.img);
+  } catch (error) {
+    console.error('Error retrieving project image:', error);
+    return errorResponse(res, 500, error.message, 'Server error');
+  }
+};
+
+  
 module.exports = {
   createProject,
   getProjects,
+  getProjectImage,
 };
