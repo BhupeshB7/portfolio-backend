@@ -31,9 +31,9 @@ const readFile = util.promisify(fs.readFile);
 
 exports.sendEmail = async (req, res) => {
   try {
-    const { name, email, message } = req.body;
+    const { name, email, message, softwareOption, applicationType, mobileNo, city } = req.body;
 
-    if (!name || !email || !message) {
+    if (!name || !email || !message  || !mobileNo || !city) {
       return res.status(400).json({ error: "All fields are required." });
     }
 
@@ -43,7 +43,15 @@ exports.sendEmail = async (req, res) => {
     const template = await readFile("./email-template.html", "utf-8");
 
     // Use EJS to render the template with dynamic data
-    const html = ejs.render(template, { name, email, message });
+    const html = ejs.render(template, { 
+      name, 
+      email, 
+      message, 
+      softwareOption, 
+      applicationType, 
+      mobileNo, 
+      city 
+    });
 
     const mailOptions = {
       from: nodemailerConfig.auth.user,
@@ -53,9 +61,16 @@ exports.sendEmail = async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-    const newEmail = new Email({ name, email, message });
+    // const newEmail = new Email({ 
+    //   name, 
+    //   email, 
+    //   message, 
+    //   softwareOption, 
+    //   applicationType, 
+    //   mobileNo, 
+    //   city 
+    // });
     // await newEmail.save();
-    // res.status(200).send("Email sent and data saved");
     res.status(200).json({ success: true });
   } catch (error) {
     console.error(error);

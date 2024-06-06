@@ -16,83 +16,92 @@
       crossorigin="anonymous"
     ></script> -->
     <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            clifford: '#da373d',
-          }
-        }
-      }
-    }
-  </script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: "#da373d",
+            },
+          },
+        },
+      };
+    </script>
     <style>
-        body{
-            padding: 20px;
-            background: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: auto;
-        }
-        .card-container{
-            width: 100%;
-            min-width: 300px;
-            height: 100%;
-            max-width: 400px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            overflow: hidden !important;
-            border-radius: 10px;
-            background:#ffffff;
-        }
-        .card-container img{
-            width: 100%;
-            height: 200px;
-        }
-        .card-item{
-            padding: 6px 4px;
-        }
-        .card-item h6{
-            font-weight: bold;
-            font-size: 1rem;
-            margin-bottom: 4px;
-            padding: 5px;
-        }
-        .card-item p{
-            color: gray;
-            padding: 5px;
-            font-size: 0.8rem;
-        }
-        .card-footer{
-            padding: 10px;
-            padding-bottom: 5px;
-        }
-        .card-footer span{
-            margin-right: 10px;
-            display: inline-block;
-            background: rgb(217, 216, 216);
-            border-radius: 30px;
-            padding: 9px;
-            text-align: center;
-            color: black;
-            font-weight: normal;
-        }
+      body {
+        padding: 20px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+      }
+      .card-container {
+        width: 100%;
+        min-width: 300px;
+        height: 100%;
+        max-width: 400px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        overflow: hidden !important;
+        border-radius: 10px;
+        background: #ffffff;
+      }
+      .card-container img {
+        width: 100%;
+        height: 200px;
+      }
+      .card-item {
+        padding: 6px 4px;
+      }
+      .card-item h6 {
+        font-weight: bold;
+        font-size: 1rem;
+        margin-bottom: 4px;
+        padding: 5px;
+      }
+      .card-item p {
+        color: gray;
+        padding: 5px;
+        font-size: 0.8rem;
+      }
+      .card-footer {
+        padding: 10px;
+        padding-bottom: 5px;
+      }
+      .card-footer span {
+        margin-right: 10px;
+        display: inline-block;
+        background: rgb(217, 216, 216);
+        border-radius: 30px;
+        padding: 9px;
+        text-align: center;
+        color: black;
+        font-weight: normal;
+      }
     </style>
   </head>
   <body>
     <div class="card-container">
-        <img  src="https://img.freepik.com/free-vector/flat-design-illustration-customer-support_23-2148887720.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=ais" alt="Contact us">
-        <div class="card-item">
-          <h6>Name:<%= name %></h6>
-          <p>Email: <%= email %> </p>
-          <p> Message: <%= message %> </p>
-        </div>
-        <div class="card-footer">
-          <span >#email</span>
-          <span >#twitter</span>
-          <span >#instagram</span>
-        </div>
+      <img
+        src="https://img.freepik.com/free-vector/flat-design-illustration-customer-support_23-2148887720.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=ais"
+        alt="Contact us"
+      />
+      <div class="card-item">
+        <h6>Name:<%= name %></h6>
+        <p>Email: <%= email %></p>
+        <p>Message: <%= message %></p>
+        <p><strong>Software Option:</strong> <%= softwareOption %></p>
+        <% if (softwareOption === "yes") { %>
+        <p><strong>Application Type:</strong> <%= applicationType %></p>
+        <% } %>
+        <p><strong>Mobile No:</strong> <%= mobileNo %></p>
+        <p><strong>City:</strong> <%= city %></p>
       </div>
+      <div class="card-footer">
+        <span>#email</span>
+        <span>#twitter</span>
+        <span>#instagram</span>
+      </div>
+    </div>
   </body>
 </html>
