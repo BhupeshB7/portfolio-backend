@@ -33,7 +33,7 @@ exports.sendEmail = async (req, res) => {
   try {
     const { name, email, message, softwareOption, applicationType, mobileNo, city } = req.body;
 
-    if (!name || !email || !message  || !mobileNo || !city) {
+    if (!name || !email || !message  || !mobileNo ) {
       return res.status(400).json({ error: "All fields are required." });
     }
 
