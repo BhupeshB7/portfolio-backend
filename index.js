@@ -8,15 +8,20 @@ const mongoose = require('mongoose');
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin:"http://localhost:3000",
+    origin: "*",
+  })
+);
 app.use(bodyParser.json());
 
 const emailRoutes = require('./routes/emailRoutes');
 app.use('/api', emailRoutes);
 const projectRoutes = require('./routes/projectRoutes');
 app.use('/api', projectRoutes);
-app.get('/api/status', (req, res) => {
-  res.json({ message: 'Portfoliobackend server is started now' });
+app.get('/', (req, res) => {
+  res.json({ message: 'Portfolio Backend server is started now' });
 });
 const PORT = process.env.PORT || 5000;
 
