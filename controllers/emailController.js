@@ -26,31 +26,39 @@ const util = require("util");
 const ejs = require("ejs");
 const nodemailer = require("nodemailer");
 const nodemailerConfig = require("../config/emailConfig"); // Assuming you have a nodemailer configuration file
-
+const path = require("path");
 const readFile = util.promisify(fs.readFile);
 
 exports.sendEmail = async (req, res) => {
   try {
-    const { name, email, message, softwareOption, applicationType, mobileNo, city } = req.body;
+    const {
+      name,
+      email,
+      message,
+      softwareOption,
+      applicationType,
+      mobileNo,
+      city,
+    } = req.body;
 
-    if (!name || !email || !message  || !mobileNo ) {
+    if (!name || !email || !message || !mobileNo) {
       return res.status(400).json({ error: "All fields are required." });
     }
 
     const transporter = nodemailer.createTransport(nodemailerConfig);
 
     // Load the HTML template
-    const template = await readFile("./email-template.html", "utf-8");
+    const template = await readFile("email-template.html", "utf-8");
 
     // Use EJS to render the template with dynamic data
-    const html = ejs.render(template, { 
-      name, 
-      email, 
-      message, 
-      softwareOption, 
-      applicationType, 
-      mobileNo, 
-      city 
+    const html = ejs.render(template, {
+      name,
+      email,
+      message,
+      softwareOption,
+      applicationType,
+      mobileNo,
+      city,
     });
 
     const mailOptions = {
@@ -61,21 +69,21 @@ exports.sendEmail = async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-    // const newEmail = new Email({ 
-    //   name, 
-    //   email, 
-    //   message, 
-    //   softwareOption, 
-    //   applicationType, 
-    //   mobileNo, 
-    //   city 
+    // const newEmail = new Email({
+    //   name,
+    //   email,
+    //   message,
+    //   softwareOption,
+    //   applicationType,
+    //   mobileNo,
+    //   city
     // });
     // await newEmail.save();
     res.status(200).json({ success: true });
   } catch (error) {
     console.error(error);
     if (!res.headersSent) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ error: "Internal Server Error" });
     }
     res.status(500).json({ error: "Internal Server Error" });
   }
