@@ -48,7 +48,10 @@ exports.sendEmail = async (req, res) => {
     const transporter = nodemailer.createTransport(nodemailerConfig);
 
     // Load the HTML template
-    const template = await readFile("email-template.html", "utf-8");
+    // const template = await readFile("email-template.html", "utf-8");
+    const templatePath = path.join(__dirname, '..', 'email-template.html');
+    const template = await readFile(templatePath, "utf-8");
+
 
     // Use EJS to render the template with dynamic data
     const html = ejs.render(template, {
