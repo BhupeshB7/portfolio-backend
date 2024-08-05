@@ -88,6 +88,7 @@ exports.sendEmail = async (req, res) => {
     if (!res.headersSent) {
       res.status(500).json({ error: "Internal Server Error" });
     }
+    console.log(error); 
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
