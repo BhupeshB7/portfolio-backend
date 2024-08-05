@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -15,7 +14,7 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-
+//API Routes
 const emailRoutes = require('./routes/emailRoutes');
 app.use('/api', emailRoutes);
 const projectRoutes = require('./routes/projectRoutes');
@@ -23,8 +22,10 @@ app.use('/api', projectRoutes);
 app.get('/', (req, res) => {
   res.json({ message: 'Portfolio Backend server is started now' });
 });
+//API Routes Ends
+//Server Starts
 const PORT = process.env.PORT || 5000;
-
+//Database Connection
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
